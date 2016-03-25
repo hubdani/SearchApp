@@ -10,15 +10,14 @@ import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.common.SolrInputDocument;
 
 import com.entity.Article;
-import com.parser.util.Parser;
 import com.search.engine.utils.CommonConstraints;
 import com.store.ArticleStore;
 
 public class Indexer {
 	public static void main(String[] args) throws IOException, SolrServerException {
-		String xmlToParse = "dblp.xml";
+		//String xmlToParse = "dblp.xml";
 		//String xmlToParse = "test.xml";
-		Parser p = new Parser(xmlToParse);
+		//Parser p = new Parser(xmlToParse);
 		HttpSolrClient server = new HttpSolrClient( CommonConstraints.APPLICATION_SOLR_URL );
 		Iterator<Entry<Long,Article>> iterator=ArticleStore.articleMap.entrySet().iterator();
 		int i=0;
@@ -29,7 +28,7 @@ public class Indexer {
 			doc.addField("id",  entry.getValue().getId());
 			doc.addField("title", entry.getValue().getTitle());
 			doc.addField("journal", entry.getValue().getJournal());
-			doc.addField("authors", entry.getValue().getAuthors());
+			doc.addField("authorsNames", entry.getValue().getAuthorsNames());
 			doc.addField("key", entry.getValue().getKey());
 			doc.addField("mdate", entry.getValue().getMdate());
 			doc.addField("year", entry.getValue().getYear());

@@ -1,6 +1,8 @@
 package com.search.engine.action;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,8 +16,6 @@ import org.apache.solr.common.SolrDocumentList;
 
 import com.entity.Article;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.parser.util.Parser;
 import com.search.engine.utils.JsonHelper;
 import com.solr.IndexSearcher;
 
@@ -49,8 +49,12 @@ public class SearchAction extends HttpServlet {
 		SolrDocumentList results;
 		try {
 			results = is.getSearchResults(searchText, rowsInPage, page);
-			String bothJson ="[";
-			String json2 = new Gson().toJson(results);
+			List<Article> jsonStrList = new ArrayList<Article>();
+			System.out.println("results>>"+results);
+			for (SolrDocument solrDocument : results) {
+				jsonStrList.add(JsonHelper.articleObjectCreater(solrDocument));
+			}
+			String json2 = new Gson().toJson(jsonStrList);
 			System.out.println(">>"+json2);
 		response.setContentType("application/json"); 
 		response.setCharacterEncoding("utf-8");

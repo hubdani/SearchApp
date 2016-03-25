@@ -22,7 +22,7 @@ public class IndexSearcher {
 		query.setStart((pageNo - 1) * noOfRows);
 		query.setRows(noOfRows);
 		query.setFacet(true);
-		//query.set("defType", "edismax");
+		query.set("defType", "edismax");
 		query.setParam("wt", "json");  //doesn't affect the return format
 		/*
 		 * doc.addField("id",  entry.getValue().getId());

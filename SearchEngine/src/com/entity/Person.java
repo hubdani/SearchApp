@@ -76,11 +76,7 @@ public class Person {
     static public int numberOfPersons() {
         return personMap.size();
     }
-    @Override
-    public String toString() {
-        return this.name;
-    }
-    
+
     static public void enterPublications() {
         Iterator publIt = Publication.iterator();
         Publication publ;
